@@ -1,0 +1,19 @@
+﻿@model Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row d-flex flex-row" >
+    <div class="col-md-3">
+        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Poster))" alt="Poster" class="img-thumbnail"/>
+    </div>
+    <div class="col-md-7">
+        <div class="">
+            <h3><@Model.Title</h3>
+            <div>Rate : @Model.Rate.ToString("0.0")</div>
+            <div>Production Year : @Model.Year </div>
+            <p>@Model.StoryLine</p>
+        </div>
+    </div>
+</div>

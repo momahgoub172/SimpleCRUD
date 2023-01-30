@@ -1,0 +1,74 @@
+﻿@model SimpleCRUD.View_Models.MovieFormViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2> Edit @Model.Title Movie</h2>
+<hr/>
+
+<section class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="edit" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="text-muted" asp-for="Id"></label>
+                <input type="text" class="form-control" asp-for="Id" maxlength="250"/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="text-muted" asp-for="Title"></label>
+                <input type="text" class="form-control" asp-for="Title" maxlength="250"/>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label class="text-muted" asp-for="GenreId"></label>
+                <select class="form-control" asp-for="GenreId" asp-items="@(new SelectList(Model.Genres, "GenreId", "Name"))">
+                    <option></option>
+                </select>
+                <span asp-validation-for="GenreId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 w-50">
+                <label class="text-muted" asp-for="Year"></label>
+                <input type="number" class="form-control" asp-for="Year" maxlength="250" value="@(Model.Year > 0 ? Model.Year : String.Empty)"/>
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 w-50">
+                <label class="text-muted" asp-for="Rate"></label>
+                <input type="number" class="form-control" asp-for="Rate" maxlength="250" value="@(Model.Rate > 0 ? Model.Rate : String.Empty)"/>
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label class="text-muted" asp-for="StoryLine"></label>
+                <textarea class="form-control" asp-for="StoryLine" maxlength="3000" rows="5"></textarea>
+                <span asp-validation-for="StoryLine" class="text-danger"></span>
+            </div>
+            <div class="input-group mt-3">
+                <input type="file" class="form-control" id="Poster-in" asp-for="Poster" accept="image/*" value="Upload Poster"/>
+                <span asp-validation-for="Poster" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Edit</button>
+            <a asp-action="Index" class="btn btn-outline-secondary mt-3">Back</a>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div id="poster" >
+            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Poster))" alt="Poster" class="img-thumbnail"/>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml"); }
+    <script>
+    $(document).ready(function () {
+        $('#Poster-in').on('change',function(){
+            var poster = $('#poster');
+            var image = window.URL.createObjectURL(this.files[0]);
+            poster.removeClass('d-none');
+            poster.find('img').attr('src',image);
+        });
+    });
+    </script>
+}
