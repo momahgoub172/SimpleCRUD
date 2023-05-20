@@ -12,16 +12,16 @@
 
 ---------------------------
 # Features:
-##1-CRUD:
+## 1-CRUD:
 - Create Movie / Genre
 - Read Movie / Genre
 - Update Movie / Genre
 - Delete Movie / Genre
 
-##2-Other
+## 2-Other
 - Activation Email using EmailSender Service
 
-#Auth operations
+# Auth operations
 - Login
 - Logoff
 - Register
