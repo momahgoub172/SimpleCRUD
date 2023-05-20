@@ -1,0 +1,19 @@
+﻿@model SimpleCRUD.View_Models.TwoFactorAuthViewModel
+
+<p>Please enter the code below in your auth App :  @Model.Token </p>
+<p> Or Scan QR code</p>
+<div id="qrcode"></div>
+<form asp-controller="Account" asp-action="TwoFactorAuthSetup" method="post">
+    <input type="hidden" asp-for="Token"/>
+    <div class="form-control">
+        Enter Code :  <input type="text" class="form-control" asp-for="Code" />
+    </div>
+    <button type="submit" class="btn btn-primary"> Submit</button>
+</form>
+@section Scripts
+{
+    <script src="~/js/qrcode.js" ></script>
+    <script type="text/javascript">
+     new QRCode(document.getElementById("qrcode"), "@Model.QRCodeUrl");
+    </script>
+}

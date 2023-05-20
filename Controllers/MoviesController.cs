@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleCRUD.EFCore;
 using SimpleCRUD.Models;
@@ -24,6 +25,7 @@ public class MoviesController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> Create()
     {
          MovieFormViewModel viewModel = new MovieFormViewModel
